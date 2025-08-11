@@ -1,5 +1,5 @@
 import {type JSX, useState } from 'react';
-import { Entry, Buttons } from './ui';
+import { Entry, Buttons } from '../components';
 import type { EntryProps, FormProps } from '../types';
 
 export const Form = (): JSX.Element => {

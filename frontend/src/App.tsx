@@ -1,7 +1,7 @@
 import type { JSX } from 'react';
 import { useState } from 'react';
 import { Card } from 'flowbite-react';
-import { Terminal, Form } from './components';
+import { Terminal, Form } from './sections';
 
 // Tab menu items
 const tabs = [
