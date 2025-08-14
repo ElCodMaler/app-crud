@@ -15,3 +15,13 @@ export type FormProps = {
     phone?: string;
     address?: string;
 }
+//campos originales de la base de datos
+export interface User {
+  id?: number;
+  name: string;
+  email: string;
+  password: string;
+  phone?: string;
+  address?: string;
+  created_at?: Date;
+}
