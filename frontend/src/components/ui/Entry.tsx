@@ -11,12 +11,12 @@ type EntryProps = {
 }
 
 // Entry component
-export const Entry = ({ label, labelProps, inputProps, alert, alertProps }: EntryProps): JSX.Element => {
+export const Entry = ({ label, inputProps, alert }: EntryProps): JSX.Element => {
     return (
-        <div>
-            <Label {...labelProps}>{label}</Label>
+        <div className='mb-3'>
+            <Label className="text-[16px] font-medium text-white">{label}</Label>
             <TextInput {...inputProps}/>
-            <HelperText {...alertProps}>
+            <HelperText color='failure' className='mt-0.5 text-sm'>
                 {alert}
             </HelperText>
         </div>

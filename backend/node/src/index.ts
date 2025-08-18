@@ -1,30 +1,44 @@
-import express from "express";
-import cors from "cors";
-import { pool as db} from './db.js';
+import express from 'express';
+import userRoutes from './user.routes.js';
+import { AppDataSource } from './data-source.js';
+import cors from 'cors';
+import dotenv from 'dotenv';
+
+dotenv.config();
 
 const app = express();
-app.use(cors());
-app.use(express.json());
+const PORT = process.env.PORT || 3000;
+const corsOptions = {
+  origin: 'http://localhost:5173', // URL exacta de tu frontend
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization'],
+  credentials: true,
+  optionsSuccessStatus: 200 // Para navegadores antiguos
+};
 
+// Middlewares esenciales
+app.use(express.json()); // Para parsear JSON
+app.use(express.urlencoded({ extended: true })); // Para parsear form data
+app.use(cors(corsOptions));
 
-export async function query(sql: string, params?: any[]) {
-    const connection = await db.getConnection();
-    const [rows] = await connection.execute(sql, params);
-    connection.release();
-    return rows;
-}
-
-app.get("/usuarios", async (req, res) => {
-  const rows = await query("SELECT * FROM usuarios");
-  res.json(rows);
+// Asegúrate de incluir esto ANTES de tus rutas
+app.use((req, res, next) => {
+  res.setHeader('Content-Type', 'application/json');
+  res.setHeader('X-Powered-By', 'Express');
+  next();
 });
 
-app.post("/usuarios", async (req, res) => {
-  const { nombre, email } = req.body;
-  await query("INSERT INTO usuarios (nombre, email) VALUES (?, ?)", [nombre, email]);
-  res.json({ message: "Usuario agregado" });
-});
+// Rutas
+app.use('/api/users', userRoutes);
 
-app.listen(3000, () => {
-  console.log("Backend corriendo en puerto 3000");
-});
+// Inicialización
+AppDataSource.initialize()
+  .then(() => {
+    console.log('Database connected');
+    app.listen(PORT, () => {
+      console.log(`Server running on http://localhost:${PORT}`);
+    });
+  })
+  .catch(error => console.log('Database connection error:', error));
+
+export default app;

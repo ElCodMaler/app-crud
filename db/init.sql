@@ -9,6 +9,7 @@ CREATE TABLE IF NOT EXISTS users (
   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
-INSERT INTO users (name, email, password, phone, address) VALUES
-('Alice', 'alice@example.com', 'abcdefgh', '12775984','avv 1, calle 1, estado anzoategui'),
-('Bob', 'bob@example.com','parantico', '44545574','av 13, calle Ols, estado Monagas');
+INSERT INTO users (name, email, password, phone, address)
+SELECT 'Alice', 'alice@example.com', 'abcdefgh', '12775984','avv 1, calle 1, estado anzoategui'
+FROM dual
+WHERE NOT EXISTS (SELECT 1 FROM users LIMIT 1)

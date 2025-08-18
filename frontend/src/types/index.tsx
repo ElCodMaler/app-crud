@@ -1,11 +1,5 @@
 import type { JSX } from "react";
-export interface EntryProps {
-    label: string;
-    inputProps: React.InputHTMLAttributes<HTMLInputElement>;
-    labelProps?: React.LabelHTMLAttributes<HTMLLabelElement>;
-    alert?: string | JSX.Element;
-    alertProps?: React.HTMLAttributes<HTMLDivElement>;
-}
+
 // Form component
 export type FormProps = {
     username?: string;
@@ -15,13 +9,19 @@ export type FormProps = {
     phone?: string;
     address?: string;
 }
+export interface EntryProps {
+    id: keyof FormProps;
+    label: string;
+    inputProps: React.InputHTMLAttributes<HTMLInputElement>;
+    alert?: string | JSX.Element;
+}
 //campos originales de la base de datos
 export interface User {
   id?: number;
   name: string;
   email: string;
   password: string;
-  phone?: string;
+  phone: string;
   address?: string;
   created_at?: Date;
 }

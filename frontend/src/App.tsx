@@ -14,7 +14,7 @@ export const App = (): JSX.Element => {
 
     return (
         <main className="flex-grow p-6 flex flex-col items-center min-h-screen bg-primary-50 text-gray-400 font-bold">
-            <Card className="w-2xl h-[640px] bg-primary-700 text-white border-none rounded-xl shadow-2xl flex flex-col relative overflow-hidden">
+            <Card className="w-2xl h-[655px] bg-primary-700 text-white border-none rounded-xl shadow-2xl flex flex-col relative overflow-hidden">
                 {/* Tabs menu */}
                 <nav className="flex border-b border-primary-900 bg-primary-700 sticky top-0 z-10">
                     {tabs.map((tab, id) => (
