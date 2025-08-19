@@ -1,7 +1,7 @@
-import {type JSX, useState } from 'react';
-import { Entry, Buttons } from '../components';
-import type { EntryProps, FormProps, User } from '../types';
 import type { TextInputProps } from 'flowbite-react';
+import {type JSX, useState } from 'react';
+import { Entry, Buttons, Alerts } from '../components';
+import type { EntryProps, FormProps, User } from '../types';
 import { AuthService } from '../utils/api';
 
 //types
@@ -19,7 +19,6 @@ export const Form = (): JSX.Element => {
         phone: "",
         address: ""
     };
-   
     const initialInputColors: InputColorState = {
         ...Object.fromEntries(
             Object.keys(templateForm).map(key => [key, "info"])
@@ -29,9 +28,8 @@ export const Form = (): JSX.Element => {
     const [alert, setAlert] = useState<FormProps>(templateForm);
     const [formEntries, setFormEntries] = useState<FormProps>(templateForm);
     const [inputColors, setInputColors] = useState<InputColorState>(initialInputColors);
+    const [error, setError] = useState({visible: false, value:''});
     // FUNCTIONS
-
-    // Encoding...
     // Submit form to API
     const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
@@ -42,11 +40,21 @@ export const Form = (): JSX.Element => {
             phone: formEntries.phone || 'none',
             address: formEntries.address
         }
-        console.log(user);
-        console.info(await AuthService.register(user));
+        AuthService.register(user)
+            .then(() => {
+                setFormEntries(prev => ({
+                    ...prev,
+                    ...templateForm
+                }));
+            })
+            .catch(error => {
+                setError(prev => ({
+                    ...prev,
+                    value: error,
+                    visible: true
+                }));
+            });
     };
-    // Encoding...
-
     // Define the function to handle input blur event
     const handleInputBlur = (field: keyof FormProps) => (event: React.ChangeEvent<HTMLInputElement>) => {
         const value = event.target.value;
@@ -84,8 +92,9 @@ export const Form = (): JSX.Element => {
     };
     // search required value
     const valueRequire = (entry: EntryProps): TextInputProps => {
-        return (!entry.label.includes("*")) ? {id:entry.label,...entry.inputProps} : {
+        return (!entry.label.includes("*")) ? {id:entry.label,value: formEntries[entry.id],...entry.inputProps} : {
                             id:entry.id,
+                            value: formEntries[entry.id],
                             onChange:handleInputChange(entry.id),
                             onBlur:handleInputBlur(entry.id),
                             ...entry.inputProps
@@ -170,6 +179,9 @@ export const Form = (): JSX.Element => {
                     />
                 ))}
                 <Buttons type="submit" className='text-xl'>Submit</Buttons>
+                <Alerts variant='error' visible={error.visible} className='fixed bottom-3 text-center'>
+                    {error.value}
+                </Alerts>
             </form>
         </>
     );

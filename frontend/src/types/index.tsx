@@ -15,6 +15,7 @@ export interface EntryProps {
     inputProps: React.InputHTMLAttributes<HTMLInputElement>;
     alert?: string | JSX.Element;
 }
+
 //campos originales de la base de datos
 export interface User {
   id?: number;
@@ -23,5 +24,6 @@ export interface User {
   password: string;
   phone: string;
   address?: string;
+  is_active?: boolean;
   created_at?: Date;
 }

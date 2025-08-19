@@ -51,7 +51,7 @@ export const AuthService = {
         throw new Error(errorData.message || 'Error de Entrada');
       }
 
-      return await response.json();
+      return response.json();
     } catch (error) {
       console.error('Fetch error:', error);
       return {

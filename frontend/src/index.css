@@ -14,4 +14,20 @@
   --color-primary-700: #0e3850;
   --color-primary-800: #0d2e41;
   --color-primary-900: #09293c;
+  /* color secundario */
+  --color-secondary-400: #263447;
+  --color-secondary-700: #1F2937;
+  --color-secondary-800: #1a2639;
+  --color-secondary-900: #141a23;
+  /* color tercery */
+  --color-tercery-100: #7bb5f2;
+  --color-tercery-50: #b5cee8;
+}
+
+
+body{
+  background-color:#1F2937;
+}
+p{
+  background-color: #263447;
 }
