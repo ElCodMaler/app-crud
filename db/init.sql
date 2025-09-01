@@ -1,4 +1,4 @@
-CREATE TABLE IF NOT EXISTS users (
+CREATE TABLE IF NOT EXISTS user (
   id INT AUTO_INCREMENT PRIMARY KEY,
   name VARCHAR(100) NOT NULL CHECK (name REGEXP '^[A-Za-zÁ-ú ]+$'),
   email VARCHAR(255) NOT NULL UNIQUE CHECK (email REGEXP '^[^@]+@[^@]+\\.[^@]{2,}$'),
@@ -9,7 +9,7 @@ CREATE TABLE IF NOT EXISTS users (
   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
-INSERT INTO users (name, email, password, phone, address)
+INSERT INTO user (name, email, password, phone, address)
 SELECT 'Alice', 'alice@example.com', 'abcdefgh', '12775984','avv 1, calle 1, estado anzoategui'
 FROM dual
-WHERE NOT EXISTS (SELECT 1 FROM users LIMIT 1)
+WHERE NOT EXISTS (SELECT 1 FROM user LIMIT 1)

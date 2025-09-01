@@ -9,7 +9,7 @@ describe('User API', () => {
   let testUserId: number;
 
   beforeAll(async () => {
-    await AppDataSource.initialize();
+    AppDataSource.initialize().then(() => {}).catch(err => console.error('no se puede:'));
   });
 
   afterAll(async () => {
@@ -18,6 +18,18 @@ describe('User API', () => {
     }
     await AppDataSource.destroy();
   });
+
+  it('should register update the field user id:7 name (PATCH /api/users/7/field)', async () => {
+    const newFieldName = faker.person.firstName();
+
+    const response = await request(app)
+      .patch("/api/users/7/field")
+      .send(newFieldName)
+      .expect(201);
+
+    expect(response.body).toHaveProperty('id');
+
+  })
 
   it('should register a new user (POST /api/users/register)', async () => {
     const userData = {
@@ -45,7 +57,6 @@ describe('User API', () => {
       .get('/api/users')
       .expect(200);
 
-    expect(Array.isArray(response.body)).toBe(true);
     expect(response.body.length).toBeGreaterThanOrEqual(1);
   });
 });

@@ -1,12 +1,12 @@
-import { Router } from 'express';
-import { UserController } from './user.controller.js';
+import { Router } from "express";
+import { UserController } from "./user.controller.js";
 
 const router = Router();
 
-// POST /api/users/register
-router.post('/register', UserController.register);
-
-// GET /api/users
-router.get('/', UserController.getAllUsers);
+router.get("/", UserController.getAll);
+router.get("/:email", UserController.getUser);
+router.post("/", UserController.create);
+router.put("/:id", UserController.update);
+router.delete("/:id", UserController.delete);
 
 export default router;

@@ -10,7 +10,7 @@ const app = express();
 const PORT = process.env.PORT || 3000;
 const corsOptions = {
   origin: 'http://localhost:5173', // URL exacta de tu frontend
-  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  methods: ['GET', 'POST', 'PUT', 'DELETE'],
   allowedHeaders: ['Content-Type', 'Authorization'],
   credentials: true,
   optionsSuccessStatus: 200 // Para navegadores antiguos
@@ -29,7 +29,7 @@ app.use((req, res, next) => {
 });
 
 // Rutas
-app.use('/api/users', userRoutes);
+app.use('/api/user', userRoutes);
 
 // Inicialización
 AppDataSource.initialize()
