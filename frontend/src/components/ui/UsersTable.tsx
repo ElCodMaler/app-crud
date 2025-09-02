@@ -1,12 +1,17 @@
-import { Table, TableBody, TableCell, TableHead, TableHeadCell, TableRow } from "flowbite-react";
 import type { FC, JSX } from "react";
-import type { User } from "../../types";
-
+import type { User, PropAlert } from "../../types";
+import { Table, TableBody, TableCell, TableHead, TableHeadCell, TableRow } from "flowbite-react";
+import { AuthService } from "../../utils/api";
+// interfaces
 interface PropsList {
-    users: User[]
+    users: User[];
+    changeSection: React.Dispatch<React.SetStateAction<number>>;
+    setUser: React.Dispatch<React.SetStateAction<User | undefined>>;
+    setAlert: React.Dispatch<React.SetStateAction<PropAlert | undefined>>;
 }
-
-export const UsersTable:FC<PropsList> = ({ users }): JSX.Element =>{
+// User table component
+export const UsersTable:FC<PropsList> = ({ users, changeSection, setUser, setAlert }): JSX.Element => {
+    // template user
     const user: User = {
         id: 0,
         name: '',
@@ -15,6 +20,31 @@ export const UsersTable:FC<PropsList> = ({ users }): JSX.Element =>{
         phone: '',
         address: '',
     }
+    // FUNCTIONS
+    // handle submit
+    const handleEdit = (event: React.MouseEvent<HTMLButtonElement, MouseEvent> ,user: User) => {
+        event.preventDefault();
+        changeSection(1);
+        setUser(user);
+    };
+    // handle delete
+    const handleDelete = (event: React.MouseEvent<HTMLButtonElement, MouseEvent> ,id: number) => {
+        event.preventDefault();
+        AuthService.delete(id)
+            .then(res => {
+                setAlert({
+                    typeAlert: 'success',
+                    message:res.data
+                })
+            })
+            .catch(err => {
+                setAlert({
+                    typeAlert: "error",
+                    message: err.message
+                });
+            })
+    };
+    // RENDERING
     return (
         <Table className="overflow-x-auto">
             <TableHead className="">
@@ -31,8 +61,8 @@ export const UsersTable:FC<PropsList> = ({ users }): JSX.Element =>{
                 </TableRow>
             </TableHead>
             <TableBody className="divide-y">
-                {users.map(user => (
-                    <TableRow className="border-gray-700 bg-secondary-800 text-gray-300">
+                {users.map((user,id) => (
+                    <TableRow key={id} className="border-gray-700 bg-secondary-800 text-gray-300">
                         <TableCell>
                             {user.id}
                         </TableCell>
@@ -52,14 +82,20 @@ export const UsersTable:FC<PropsList> = ({ users }): JSX.Element =>{
                             {user.address}
                         </TableCell>
                         <TableCell>
-                            <a href="#" className="font-medium text-tercery-100 hover:underline">
+                            <button 
+                                className="font-medium text-tercery-100 hover:text-tercery-50 cursor-pointer"
+                                onClick={e => handleEdit(e,user)}
+                            >
                                 Edit
-                            </a>
+                            </button>
                         </TableCell>
                         <TableCell>
-                            <a href="#" className="font-medium text-red-700 hover:underline">
+                            <button 
+                                className="font-medium text-red-700 hover:text-red-600 cursor-pointer"
+                                onClick={e => handleDelete(e,user.id ? user.id : 0)}
+                            >
                                 Delete
-                            </a>
+                            </button>
                         </TableCell>
                     </TableRow>
                 ))}

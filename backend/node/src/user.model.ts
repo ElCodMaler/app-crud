@@ -17,9 +17,11 @@ export const UserModel = {
     return rows;
   },
 
-  async getById(email: string) {
-    const [rows] = await db.query("SELECT * FROM user WHERE email = ?", [email]);
-    return Array.isArray(rows) ? rows[0] : null;
+  async getById(id: number) {
+    const rows = await db.query("SELECT * FROM user WHERE id = ?", [id]);
+    console.log(rows);
+    console.log(typeof rows);
+    return rows;
   },
 
   async create(user: User) {

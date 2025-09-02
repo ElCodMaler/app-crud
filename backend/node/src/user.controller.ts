@@ -9,8 +9,8 @@ export const UserController = {
   },
 
   async getUser(req: Request, res: Response){
-    const { email } = req.body;
-    const user = await UserModel.getById(email);
+    const { id } = req.params;
+    const user = await UserModel.getById(parseInt(id));
     res.json(user);
   },
 

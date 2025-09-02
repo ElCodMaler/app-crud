@@ -1,14 +1,19 @@
 import type { TextInputProps } from 'flowbite-react';
-import {type JSX, useState } from 'react';
-import { Entry, Buttons, Alerts } from '../components';
-import type { EntryProps, FormProps, User } from '../types';
+import type { JSX, FC } from 'react';
+import type { EntryProps, FormProps, User, PropAlert } from '../types';
+import { useState, useEffect } from 'react';
+import { Entry, Buttons } from '../components';
 import { AuthService } from '../utils/api';
-
-//types
+// type
 type InputColorState = Record<keyof FormProps, "info" | "success" | "failure">;
-
+// inferfacer
+interface PropsTable{
+    user: User | undefined;
+    setAlert: React.Dispatch<React.SetStateAction<PropAlert | undefined>>;
+    setUser: React.Dispatch<React.SetStateAction<User | undefined>>;
+}
 // Element JSX (Form)
-export const Form = (): JSX.Element => {
+export const Form:FC<PropsTable> = ({ user, setAlert, setUser }): JSX.Element => {
     // INITIALIZATIONS
     // required constants
     const templateForm: FormProps = {
@@ -25,35 +30,54 @@ export const Form = (): JSX.Element => {
         ) as InputColorState
     };
     // State to manage form
-    const [alert, setAlert] = useState<FormProps>(templateForm);
+    const [alert, setEntryAlert] = useState<FormProps>(templateForm);
     const [formEntries, setFormEntries] = useState<FormProps>(templateForm);
     const [inputColors, setInputColors] = useState<InputColorState>(initialInputColors);
-    const [error, setError] = useState({visible: false, value:''});
     // FUNCTIONS
     // Submit form to API
     const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
-        const user: User = {
+        const userForm: User = {
             name: formEntries.username || 'none',
             email: formEntries.email || 'none',
             password: formEntries.password || 'none',
             phone: formEntries.phone || 'none',
-            address: formEntries.address
+            address: formEntries.address || 'none'
         }
-        AuthService.register(user)
-            .then(() => {
-                setFormEntries(prev => ({
-                    ...prev,
-                    ...templateForm
-                }));
-            })
-            .catch(error => {
-                setError(prev => ({
-                    ...prev,
-                    value: error,
-                    visible: true
-                }));
-            });
+        if(!user){
+            AuthService.register(userForm)
+                .then(res => {
+                    setFormEntries(prev => ({
+                        ...prev,
+                        ...templateForm
+                    }));
+                    setAlert({
+                        typeAlert:'success',
+                        message:res.data
+                    })
+                })
+                .catch(error => {
+                    setAlert({
+                        typeAlert:'error',
+                        message:error.message
+                    })
+                });
+        } else {
+            // en este caso estariamos en modo actualizacion
+            AuthService.update(userForm)
+                .then(res => {
+                    setAlert({
+                        typeAlert:'success',
+                        message:res.data
+                    })
+                })
+                .catch(error => {
+                    setAlert({
+                        typeAlert:'error',
+                        message:error.message
+                    })
+                });
+        }
     };
     // Define the function to handle input blur event
     const handleInputBlur = (field: keyof FormProps) => (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -63,7 +87,7 @@ export const Form = (): JSX.Element => {
             [field]: value.trim().length === 0 ? "failure" : prev[field]
         }));
         // Reset the alert message if the field is not empty
-        setAlert(prev => ({
+        setEntryAlert(prev => ({
             ...prev,
             [field]: value.trim().length === 0 ? `The ${field} field is required.` : prev[field]
         }));
@@ -79,7 +103,7 @@ export const Form = (): JSX.Element => {
             ...prev,
             [field]: assessPW || assessPhone ? "failure" : "info"
         }));
-        setAlert(prev => ({
+        setEntryAlert(prev => ({
             ...prev,
             [field]: assessPW ? "Passwords do not match." : (
                     assessPhone ? "Phone number can only contain digits and '+' sign." : ''
@@ -166,10 +190,38 @@ export const Form = (): JSX.Element => {
             alert:alert.address
         }
     ];
-    // Render the form with entries
+    //vulue event
+    useEffect(() => {
+        if(user){
+            setFormEntries({
+                "username":user.name,
+                "email":user.email,
+                "phone":user.phone,
+                "password":user.password,
+                "confirmPassword":user.password,
+                "address":user.address || ''
+            });
+        }
+    },[]);
+    // RENDERING
     return (
-        <>
-            <form className="flex flex-col gap-0.5" onSubmit={e => handleSubmit(e)}>
+        <section className='flex items-center gap-3'>
+            <article className='row-auto w-1/2 text-center items-center'>
+                <h1 className='text-5xl bg-secondary-400 shadow-2xl border border-primary-900 rounded-3xl py-6'>
+                    C R U D
+                </h1>
+                <p className='mt-4'>
+                    Fill out the form and then press the submit button 
+                    to send the data to your local database.
+                </p>
+                {user ? <p className='mt-7'>(User to update)</p> : ''}
+                {user ? <Buttons className='text-xl cursor-pointer mx-auto' onClick={e=>{
+                    e.preventDefault();
+                    setUser(undefined);
+                    setFormEntries(templateForm);
+                }}>not Update</Buttons> : ''}
+            </article>
+            <form className="row-auto w-1/2 gap-0.5" onSubmit={e => handleSubmit(e)}>
                 {entries.map((entry, index) => (
                     <Entry 
                         label={entry.label}
@@ -178,11 +230,8 @@ export const Form = (): JSX.Element => {
                         alert={entry.alert}
                     />
                 ))}
-                <Buttons type="submit" className='text-xl'>Submit</Buttons>
-                <Alerts variant='error' visible={error.visible} className='fixed bottom-3 text-center'>
-                    {error.value}
-                </Alerts>
+                <Buttons type="submit" className='text-xl cursor-pointer'>Submit</Buttons>
             </form>
-        </>
+        </section>
     );
 }

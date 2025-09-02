@@ -2,12 +2,12 @@ import type { JSX } from "react";
 
 // Form component
 export type FormProps = {
-    username?: string;
-    email?: string;
-    password?: string;
-    confirmPassword?: string;
-    phone?: string;
-    address?: string;
+    username: string;
+    email: string;
+    password: string;
+    confirmPassword: string;
+    phone: string;
+    address: string;
 }
 export interface EntryProps {
     id: keyof FormProps;
@@ -26,4 +26,10 @@ export interface User {
   address?: string;
   is_active?: boolean;
   created_at?: Date;
+}
+
+// Alertas
+export type PropAlert = {
+    typeAlert: "info" | "success" | "error";
+    message: string;
 }

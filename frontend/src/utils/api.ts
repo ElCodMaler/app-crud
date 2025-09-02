@@ -84,5 +84,28 @@ export const AuthService = {
       };
     }
   },
-  
+  delete: async (id: number): Promise<ApiResponse> => {
+    try{
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/api/user/${id}`, {
+        method: 'DELETE',
+        mode: 'cors', // Asegúrate de incluir esto
+        credentials: 'include', // Solo si usas cookies
+        headers: {
+          'Content-Type': 'application/json',
+          // 'Authorization': 'Bearer tu-token' // Si necesitas autenticación
+        }
+      });
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.message || 'Error de Entrada');
+      }
+      return response.json();
+    } catch(error){
+      console.error('Fetch error:', error);
+      return {
+        success: false,
+        error: error instanceof Error ? error.message : 'Error desconocido',
+      };
+    }
+  }
 };
