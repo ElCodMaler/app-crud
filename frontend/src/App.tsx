@@ -38,7 +38,7 @@ export const App = (): JSX.Element => {
                     {tabs[activeTab].content}
                 </section>
             </Card>
-            <Alerts variant={alert?.typeAlert} visible={alert ? true : false} >
+            <Alerts variant={alert?.typeAlert} visible={alert ? true : false} duration={3000}>
                 {alert?.message}
             </Alerts>
         </main>

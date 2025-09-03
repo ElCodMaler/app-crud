@@ -59,7 +59,7 @@ export const Form:FC<PropsTable> = ({ user, setAlert, setUser }): JSX.Element =>
                 })
                 .catch(error => {
                     setAlert({
-                        typeAlert:'error',
+                        typeAlert:'failure',
                         message:error.message
                     })
                 });
@@ -74,10 +74,13 @@ export const Form:FC<PropsTable> = ({ user, setAlert, setUser }): JSX.Element =>
                 })
                 .catch(error => {
                     setAlert({
-                        typeAlert:'error',
+                        typeAlert:'failure',
                         message:error
                     })
                 });
+            // limpiar entradas
+            setUser(undefined);
+            setFormEntries(templateForm);
         }
     };
     // Define the function to handle input blur event
@@ -196,15 +199,15 @@ export const Form:FC<PropsTable> = ({ user, setAlert, setUser }): JSX.Element =>
         if(user){
             setFormEntries(prev => ({
                 ...prev,
-                "username":user.name,
-                "email":user.email,
-                "phone":user.phone,
-                "password":user.password,
-                "confirmPassword":user.password,
-                "address":user.address || ''
+                username:user.name,
+                email:user.email,
+                phone:user.phone,
+                password:user.password,
+                confirmPassword:user.password,
+                address:user.address || ''
             }));
         }
-    },[user]);
+    },[]);
     // RENDERING
     return (
         <section className='flex items-center gap-3'>

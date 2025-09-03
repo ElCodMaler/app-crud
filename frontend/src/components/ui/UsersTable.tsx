@@ -1,16 +1,15 @@
-import type { FC, JSX } from "react";
+import { useEffect, useState, type FC, type JSX } from "react";
 import type { User, PropAlert } from "../../types";
 import { Table, TableBody, TableCell, TableHead, TableHeadCell, TableRow } from "flowbite-react";
 import { AuthService } from "../../utils/api";
 // interfaces
 interface PropsList {
-    users: User[];
     changeSection: React.Dispatch<React.SetStateAction<number>>;
     setUser: React.Dispatch<React.SetStateAction<User | undefined>>;
     setAlert: React.Dispatch<React.SetStateAction<PropAlert | undefined>>;
 }
 // User table component
-export const UsersTable:FC<PropsList> = ({ users, changeSection, setUser, setAlert }): JSX.Element => {
+export const UsersTable:FC<PropsList> = ({ changeSection, setUser, setAlert }): JSX.Element => {
     // template user
     const user: User = {
         id: 0,
@@ -20,6 +19,8 @@ export const UsersTable:FC<PropsList> = ({ users, changeSection, setUser, setAle
         phone: '',
         address: '',
     }
+    // State to manage Table
+    const [users, setUsers] = useState<User[]>([]);
     // FUNCTIONS
     // handle submit
     const handleEdit = (event: React.MouseEvent<HTMLButtonElement, MouseEvent> ,user: User) => {
@@ -30,20 +31,37 @@ export const UsersTable:FC<PropsList> = ({ users, changeSection, setUser, setAle
     // handle delete
     const handleDelete = (event: React.MouseEvent<HTMLButtonElement, MouseEvent> ,id: number) => {
         event.preventDefault();
-        AuthService.delete(id)
-            .then(res => {
-                setAlert({
-                    typeAlert: 'success',
-                    message:res.data
+        if(id === 0){ 
+            throw console.error('no encontro el usuario...')
+        } else {
+            AuthService.delete(id)
+                .then(res => {
+                    setAlert({
+                        typeAlert: 'success',
+                        message:res.message || 'error:'
+                    })
                 })
-            })
-            .catch(err => {
-                setAlert({
-                    typeAlert: "error",
-                    message: err.message
+                .catch(err => {
+                    setAlert({
+                        typeAlert: 'failure',
+                        message:err.message
+                    });
                 });
-            })
+        }
     };
+    // evalue state
+    useEffect(() => {
+        AuthService.get()
+            .then(res => {
+                setUsers(res.data);
+            })
+            .catch(error => {
+                setAlert({
+                    typeAlert:'failure',
+                    message:error.message
+                })
+            });
+    },[handleDelete]);
     // RENDERING
     return (
         <Table className="overflow-x-auto">
@@ -61,8 +79,8 @@ export const UsersTable:FC<PropsList> = ({ users, changeSection, setUser, setAle
                 </TableRow>
             </TableHead>
             <TableBody className="divide-y">
-                {users.map((user,id) => (
-                    <TableRow key={id} className="border-gray-700 bg-secondary-800 text-gray-300">
+                {users.map((user) => (
+                    <TableRow key={user.id} className="border-gray-700 bg-secondary-800 text-gray-300">
                         <TableCell>
                             {user.id}
                         </TableCell>

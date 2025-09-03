@@ -30,6 +30,6 @@ export interface User {
 
 // Alertas
 export type PropAlert = {
-    typeAlert: "info" | "success" | "error";
+    typeAlert: "info" | "success" | "failure";
     message: string;
 }
