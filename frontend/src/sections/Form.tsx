@@ -38,6 +38,7 @@ export const Form:FC<PropsTable> = ({ user, setAlert, setUser }): JSX.Element =>
     const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
         const userForm: User = {
+            id: user?.id,
             name: formEntries.username || 'none',
             email: formEntries.email || 'none',
             password: formEntries.password || 'none',
@@ -68,13 +69,13 @@ export const Form:FC<PropsTable> = ({ user, setAlert, setUser }): JSX.Element =>
                 .then(res => {
                     setAlert({
                         typeAlert:'success',
-                        message:res.data
+                        message:res.message || 'I don`t know'
                     })
                 })
                 .catch(error => {
                     setAlert({
                         typeAlert:'error',
-                        message:error.message
+                        message:error
                     })
                 });
         }
@@ -193,16 +194,17 @@ export const Form:FC<PropsTable> = ({ user, setAlert, setUser }): JSX.Element =>
     //vulue event
     useEffect(() => {
         if(user){
-            setFormEntries({
+            setFormEntries(prev => ({
+                ...prev,
                 "username":user.name,
                 "email":user.email,
                 "phone":user.phone,
                 "password":user.password,
                 "confirmPassword":user.password,
                 "address":user.address || ''
-            });
+            }));
         }
-    },[]);
+    },[user]);
     // RENDERING
     return (
         <section className='flex items-center gap-3'>

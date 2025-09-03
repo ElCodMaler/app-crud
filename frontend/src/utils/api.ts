@@ -1,6 +1,7 @@
 import type { User } from "../types";
 
 export interface ApiResponse {
+  message?: string;
   success: boolean;
   data?: any;
   error?: string;
@@ -69,7 +70,8 @@ export const AuthService = {
         headers: {
           'Content-Type': 'application/json',
           // 'Authorization': 'Bearer tu-token' // Si necesitas autenticación
-        }
+        }, // Para cookies si usas sesiones
+        body: JSON.stringify(data),
       });
       if (!response.ok) {
         const errorData = await response.json();
