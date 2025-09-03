@@ -54,7 +54,7 @@ export const Form:FC<PropsTable> = ({ user, setAlert, setUser }): JSX.Element =>
                     }));
                     setAlert({
                         typeAlert:'success',
-                        message:res.data
+                        message:res.message || 'none'
                     })
                 })
                 .catch(error => {
@@ -115,18 +115,18 @@ export const Form:FC<PropsTable> = ({ user, setAlert, setUser }): JSX.Element =>
         }));
         setFormEntries(prevA => ({
             ...prevA,
-            [field]: value.trim()
+            [field]: value
         }));
     };
     // search required value
     const valueRequire = (entry: EntryProps): TextInputProps => {
-        return (!entry.label.includes("*")) ? {id:entry.label,value: formEntries[entry.id],...entry.inputProps} : {
-                            id:entry.id,
-                            value: formEntries[entry.id],
-                            onChange:handleInputChange(entry.id),
-                            onBlur:handleInputBlur(entry.id),
-                            ...entry.inputProps
-                        };
+        return ({
+                    id:entry.id,
+                    value: formEntries[entry.id],
+                    onChange:handleInputChange(entry.id),
+                    onBlur: entry.label.includes("*") ? handleInputBlur(entry.id) : ()=>{},
+                    ...entry.inputProps
+                });
     };
     // List of form entries
     /**
