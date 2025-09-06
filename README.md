@@ -45,67 +45,35 @@ app-crud/
 │  │  │  ├─ user.controller.ts
 │  │  │  ├─ user.model.ts
 │  │  │  └─ user.routes.ts
-│  │  │
 │  │  ├─ package.json
-│  │  ├─ pnpm-lock.yaml
-│  │  ├─ pnpm-workspace.yaml
 │  │  ├─ README.md
 │  │  ├─ tsconfig.json
 │  │  └─ vitest.config.ts
-│  │
 │  ├─ .env.exmaple
 │  ├─ .gitignore
 │  └─ 🐳 Dockerfile
 │
-├─ 🗃️ db/
-│  └─ init.sql
+├─ 🗃️ db/ # Plantilla sql de las tablas
 │
 ├─ ⚛️ frontend/
 │  ├─ src/
-│  │  ├─ components/
-│  │  │  ├─ ui/
-│  │  │  │  ├─ Alerts.tsx
-│  │  │  │  ├─ Buttons.tsx
-│  │  │  │  ├─ Entry.tsx
-│  │  │  │  └─ UserTable.tsx
-│  │  │  │
-│  │  │  └─ index.ts
-│  │  │
-│  │  ├─ sections/
-│  │  │  ├─ Form.tsx
-│  │  │  ├─ index.ts
-│  │  │  └─ Tables.tsx
-│  │  │  
-│  │  ├─ services/
-│  │  │  └─ api.ts
-│  │  │  
-│  │  ├─ types/
-│  │  │  └─ index.tsx
-│  │  │  
+│  │  ├─ components/# Componentes reutilizables
+│  │  ├─ sections/# Secciones principales
+│  │  ├─ services/# Llamadas a la API
+│  │  ├─ types/# Tipados de componentes
 │  │  ├─ App.tsx
 │  │  ├─ index.css
-│  │  ├─ main.tsx
-│  │  └─ vite-env.d.ts
-│  │  
-│  ├─ .gitignore
-│  ├─ 🐳 Dockerfile
-│  ├─ eslint.config.js
+│  │  └─ main.tsx
 │  ├─ index.html
-│  ├─ package.json
-│  ├─ pnpm-lock.yaml
-│  ├─ pnpm-workspace.yaml
-│  ├─ prettier.config.js
-│  ├─ README.md
-│  ├─ tsconfig.app.json
+│  ├─ 🐳 Dockerfile
+│  ├─ 📋 README.md
 │  ├─ tsconfig.json
-│  ├─ tsconfig.node.json
 │  └─ vite.config.ts
 │
 ├─ 🐳 .dockerignore
 ├─ 🐳 docker-compose.yml
 └─ 📋 README.md
 ```
-
 
 ---
 
