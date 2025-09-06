@@ -9,15 +9,15 @@
 ## 📖 Tabla de Contenidos
 1. [Descripción](#-descripción)
 2. [Estructura del Proyecto](#-estructura-del-proyecto)
-3. [Tecnologías](-#tecnologías)
-4. [Diagrama de Flujo](-#diagrama-de-flujo)
-5. [Requisitos](-#requisitos)
-6. [Instalación y Ejecución](-#instalación-y-ejecución)
+3. [Tecnologías](#-tecnologías)
+4. [Diagrama de Flujo](#-diagrama-de-flujo)
+5. [Requisitos](#-requisitos)
+6. [Instalación y Ejecución](#-instalación-y-ejecución)
 7. [Frontend](./frontend/README.md)
 8. [Backend](./backend/README.md)
-9. [Docker](-#docker)
-10. [Comprobaciones rápidas](-#comprobaciones-rápidas)
-11. [Notas](-#notas)
+9. [Docker](#-docker)
+10. [Comprobaciones rápidas](#-comprobaciones-rápidas)
+11. [Notas](#-notas)
 
 ---
 
