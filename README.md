@@ -1,7 +1,39 @@
-# app-crud
-CRUD, test de backend
+# 🛠️ Proyecto CRUD - React + Node + MySQL con Docker
 
-## Estructura
+[![Docker Status](https://img.shields.io/badge/Docker-Running-brightgreen)](https://www.docker.com/)
+[![pnpm](https://img.shields.io/badge/pnpm-v8.0-blue)](https://pnpm.io/)
+[![Node](https://img.shields.io/badge/Node-20.0-green)](https://nodejs.org/)
+
+---
+
+## 📖 Tabla de Contenidos
+1. [Descripción](#descripción)
+2. [Estructura del Proyecto](#estructura-del-proyecto)
+3. [Tecnologías](#tecnologías)
+4. [Diagrama de Flujo](#diagrama-de-flujo)
+5. [Requisitos](#requisitos)
+6. [Instalación y Ejecución](#instalación-y-ejecución)
+7. [Frontend](#frontend)
+8. [Backend](#backend)
+9. [Docker](#docker)
+10. [Comprobaciones rápidas](#comprobaciones-rápidas)
+11. [Notas](#notas)
+
+---
+
+## 📝 Descripción
+Aplicación CRUD completa:
+
+- **Frontend:** React + TypeScript + Vite + Tailwind CSS  
+- **Backend:** Node.js + TypeScript + Express  
+- **Base de datos:** MySQL 8.0  
+- **Docker Compose:** Levanta todo el stack fácilmente
+
+Permite **crear, leer, actualizar y eliminar usuarios** desde la interfaz web y almacenar los datos en MySQL.
+
+---
+
+## 📂 Estructura del Proyecto
 ```markdown
 app-crud/
 ├─ 🟢 backend/
@@ -13,29 +45,60 @@ app-crud/
 │  │  │  ├─ user.controller.ts
 │  │  │  ├─ user.model.ts
 │  │  │  └─ user.routes.ts
+│  │  │
 │  │  ├─ package.json
+│  │  ├─ pnpm-lock.yaml
+│  │  ├─ pnpm-workspace.yaml
 │  │  ├─ README.md
 │  │  ├─ tsconfig.json
 │  │  └─ vitest.config.ts
+│  │
 │  ├─ .env.exmaple
 │  ├─ .gitignore
 │  └─ 🐳 Dockerfile
 │
-├─ 🗃️ db/ # Plantilla sql de las tablas
+├─ 🗃️ db/
+│  └─ init.sql
 │
 ├─ ⚛️ frontend/
 │  ├─ src/
-│  │  ├─ components/# Componentes reutilizables
-│  │  ├─ sections/# Secciones principales
-│  │  ├─ services/# Llamadas a la API
-│  │  ├─ types/# Tipados de componentes
+│  │  ├─ components/
+│  │  │  ├─ ui/
+│  │  │  │  ├─ Alerts.tsx
+│  │  │  │  ├─ Buttons.tsx
+│  │  │  │  ├─ Entry.tsx
+│  │  │  │  └─ UserTable.tsx
+│  │  │  │
+│  │  │  └─ index.ts
+│  │  │
+│  │  ├─ sections/
+│  │  │  ├─ Form.tsx
+│  │  │  ├─ index.ts
+│  │  │  └─ Tables.tsx
+│  │  │  
+│  │  ├─ services/
+│  │  │  └─ api.ts
+│  │  │  
+│  │  ├─ types/
+│  │  │  └─ index.tsx
+│  │  │  
 │  │  ├─ App.tsx
 │  │  ├─ index.css
-│  │  └─ main.tsx
-│  ├─ index.html
+│  │  ├─ main.tsx
+│  │  └─ vite-env.d.ts
+│  │  
+│  ├─ .gitignore
 │  ├─ 🐳 Dockerfile
-│  ├─ 📋 README.md
+│  ├─ eslint.config.js
+│  ├─ index.html
+│  ├─ package.json
+│  ├─ pnpm-lock.yaml
+│  ├─ pnpm-workspace.yaml
+│  ├─ prettier.config.js
+│  ├─ README.md
+│  ├─ tsconfig.app.json
 │  ├─ tsconfig.json
+│  ├─ tsconfig.node.json
 │  └─ vite.config.ts
 │
 ├─ 🐳 .dockerignore
@@ -43,28 +106,61 @@ app-crud/
 └─ 📋 README.md
 ```
 
----
-
-## Requisitos
-- Docker & Docker Compose
-- pnpm (para desarrollo local sin contenedores)
 
 ---
 
-## Pasos para levantar el proyecto
+## 🛠️ Tecnologías
+- React 18 + TypeScript  
+- Vite  
+- Tailwind CSS + Flowbite  
+- Node.js + TypeScript + Express  
+- MySQL 8.0  
+- Docker & Docker Compose  
+- pnpm  
 
-### 1️⃣ Con Docker (recomendado)
+---
 
+## 🔄 Diagrama de Flujo
+
+```text
+[Navegador / React 5170]
+        │
+        ▼
+[Frontend React]
+        │  fetch → VITE_API_URL=http://localhost:3000
+        ▼
+[Backend Node/Express 3000]
+        │  MySQL client
+        ▼
+[MySQL Container 3306]
+```
+
+## ✅ Requisitos
+
+- Docker y Docker Compose
+- pnpm
+- node.js v20
+- Conexión a Internet para instalar dependencias
+
+---
+
+## ⚡ Instalación y Ejecución
+
+#### 1️⃣ Con Docker (recomendado)
+Levanta todo el stack con:
 ```bash
 docker-compose up -d
 ```
 
-Esto levantara:
-- MySQL → `localhost:3307`
-- Backend → `localhost:3000`
-- Frontend → `localhost:5170`
+| Servicio | Puerto | URL                                            |
+| -------- | ------ | ---------------------------------------------- |
+| MySQL    | 3307   | -                                              |
+| Backend  | 3000   | [http://localhost:3000](http://localhost:3000) |
+| Frontend | 5170   | [http://localhost:5170](http://localhost:5170) |
 
-### 2️⃣ Con desarrollo local
+---
+
+#### 2️⃣ Desarrollo local sin Docker
 
 Backend
 ```bash
@@ -80,19 +176,59 @@ pnpm install
 pnpm dev
 ```
 
-Asegúrate de que `.env` de frontend apunte al backend correcto.
+Asegúrate de que `.env` del frontend apunte al backend correcto `VITE_API_URL=http://localhost:3000.`
 
 ---
 
-## Notas importantes
-- El backend espera que MySQL esté disponible en el contenedor `db`.
-- Hot reload en backend con `pnpm dev` y nodemon.
-- Las rutas del backend están protegidas con CORS para aceptar solo el frontend.
-- Para producción, revisa variables de entorno y puertos.
+## 💻 Frontend
+- Rutas principales definidas en `src/sections`
+- Componentes reutilizables en `src/components`
+- Consumo de API en `src/services/api.ts`
+- Hot reload con `pnpm dev`
 
 ---
 
-## Comprobaciones rapidas
-- Backend funcionando: `curl http://localhost:3000/api/users`
-- Frontend funcionando: abrir `http://localhost:5170` en navegador.
-- Contenedores Docker: `docker ps`.
+## 🖥️ Backend
+- Rutas REST en `/api/users`
+- Conexión MySQL usando `dotenv` y variables de entorno
+- Soporte CORS limitado al frontend (`http://localhost:5170`)
+- Hot reload con `nodemon` (`pnpm dev`)
+
+---
+
+## 🐳 Docker
+- Levanta backend, frontend y MySQL
+- Contenedores en la red app-net
+- Healthcheck para asegurar que MySQL esté listo antes del backend
+- Volúmenes para persistencia de datos:
+```yaml
+volumes:
+  db_data:
+  backend_logs:
+```
+
+---
+
+## 🔧 Comprobaciones rápidas
+- Backend funcionando:
+```bash
+curl http://localhost:3000/api/users
+```
+
+- Frontend funcionando: abrir http://localhost:5170
+- Contenedores Docker:
+```bash
+docker ps
+```
+
+---
+
+## ⚠️ Notas
+- Variables de entorno deben estar sincronizadas entre .env y docker-compose.yml
+
+- Hot reload backend con nodemon evita reconstrucciones constantes
+
+- Frontend debe apuntar siempre al puerto del backend (VITE_API_URL)
+
+- CORS configurado para seguridad en desarrollo
+
