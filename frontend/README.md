@@ -1,69 +1,113 @@
-# React + TypeScript + Vite
+# 🎨 Frontend - App CRUD
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+[![React](https://img.shields.io/badge/React-18-blue)](https://reactjs.org/)
+[![Vite](https://img.shields.io/badge/Vite-5.0-purple)](https://vitejs.dev/)
+[![TypeScript](https://img.shields.io/badge/TypeScript-5.0-blue)](https://www.typescriptlang.org/)
+[![TailwindCSS](https://img.shields.io/badge/TailwindCSS-3.4-cyan)](https://tailwindcss.com/)
+[![Flowbite](https://img.shields.io/badge/Flowbite-UI%20Components-orange)](https://flowbite-react.com/)
+[![Docker](https://img.shields.io/badge/Docker-ready-brightgreen)](https://www.docker.com/)
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 📖 Descripción
 
-## Expanding the ESLint configuration
+Este es el **frontend** de la aplicación CRUD, construido con **React + TypeScript + Vite + Tailwind CSS**.  
+Se conecta a la API REST del backend para gestionar usuarios y visualizar datos.
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+---
 
-```js
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+## 📦 Tecnologías principales
 
-      // Remove tseslint.configs.recommended and replace with this
-      ...tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      ...tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      ...tseslint.configs.stylisticTypeChecked,
+- **React 18**
+- **TypeScript**
+- **Vite**
+- **Tailwind CSS + Flowbite**
+- **Docker** (para despliegue)
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+---
+
+## 📂 Estructura del proyecto
+```
+⚛️ frontend/
+  ├─ src/
+  │  ├─ components/# Componentes reutilizables
+  │  ├─ sections/# Secciones principales
+  │  ├─ services/# Llamadas a la API
+  │  ├─ types/# Tipados de componentes
+  │  ├─ App.tsx # Configuración de rutas
+  │  ├─ index.css # Control de los estilos
+  │  ├─ main.tsx # Punto de entrada principal
+  │  └─ vite-env.d.ts
+  │  
+  ├─ 🐳 Dockerfile
+  ├─ index.html
+  ├─ package.json
+  ├─ pnpm-lock.yaml
+  ├─ pnpm-workspace.yaml
+  ├─ README.md
+  ├─ tsconfig.app.json
+  ├─ tsconfig.json
+  ├─ tsconfig.node.json
+  └─ vite.config.ts
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+---
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+## ⚙️ Variables de entorno
 
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+Crea un archivo `.env` dentro de `frontend/` con el siguiente contenido:
+
+```env
+VITE_API_URL=http://localhost:3000
+```
+
+---
+
+## 🚀 Scripts disponibles
+| Comando        | Descripción                            |
+| -------------- | -------------------------------------- |
+| `pnpm dev`     | Levanta el frontend en modo desarrollo |
+| `pnpm build`   | Genera la build de producción          |
+| `pnpm preview` | Previsualiza la build de producción    |
+
+---
+
+## 🖥️ Ejecución local
+```bash
+pnpm install
+pnpm dev
+```
+
+Abre en tu navegador:
+```arduino
+http://localhost:5170
+```
+
+---
+
+## 🐳 Docker
+
+Para levantar solo el frontend:
+```bash
+docker-compose up -d frontend
+```
+
+La app estará disponible en:
+```arduino
+http://localhost:5170
+```
+
+---
+
+## 🔄 Diagrama de flujo
+```text
+[Frontend React 5170] → (fetch) → [Backend Express 3000]
+```
+
+---
+
+## ✅ Pruebas rápidas
+
+```bash
+curl http://localhost:3000/api/users
 ```

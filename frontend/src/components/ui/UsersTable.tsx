@@ -1,7 +1,7 @@
 import { useEffect, useState, type FC, type JSX } from "react";
 import type { User, PropAlert } from "../../types";
 import { Table, TableBody, TableCell, TableHead, TableHeadCell, TableRow } from "flowbite-react";
-import { AuthService } from "../../utils/api";
+import { AuthService } from "../../services/api";
 // interfaces
 interface PropsList {
     changeSection: React.Dispatch<React.SetStateAction<number>>;

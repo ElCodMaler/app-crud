@@ -3,7 +3,7 @@ import type { JSX, FC } from 'react';
 import type { EntryProps, FormProps, User, PropAlert } from '../types';
 import { useState, useEffect } from 'react';
 import { Entry, Buttons } from '../components';
-import { AuthService } from '../utils/api';
+import { AuthService } from '../services/api';
 // type
 type InputColorState = Record<keyof FormProps, "info" | "success" | "failure">;
 // inferfacer
