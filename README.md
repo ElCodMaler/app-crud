@@ -7,8 +7,8 @@
 ---
 
 ## 📖 Tabla de Contenidos
-1. [Descripción](#descripción)
-2. [Estructura del Proyecto](#estructura-del-proyecto)
+1. [Descripción](#-descripción)
+2. [Estructura del Proyecto](#-estructura-del-proyecto)
 3. [Tecnologías](#tecnologías)
 4. [Diagrama de Flujo](#diagrama-de-flujo)
 5. [Requisitos](#requisitos)
@@ -33,7 +33,7 @@ Permite **crear, leer, actualizar y eliminar usuarios** desde la interfaz web y 
 
 ---
 
-## 📂 Estructura del Proyecto (#estructura-del-proyecto)
+## 📂 Estructura del Proyecto
 ```markdown
 app-crud/
 ├─ 🟢 backend/
