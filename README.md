@@ -33,7 +33,7 @@ Permite **crear, leer, actualizar y eliminar usuarios** desde la interfaz web y 
 
 ---
 
-## 📂 Estructura del Proyecto{#estructura-del-proyecto}
+## 📂 Estructura del Proyecto (#estructura-del-proyecto)
 ```markdown
 app-crud/
 ├─ 🟢 backend/
