@@ -13,15 +13,15 @@
 4. [Diagrama de Flujo](#diagrama-de-flujo)
 5. [Requisitos](#requisitos)
 6. [Instalación y Ejecución](#instalación-y-ejecución)
-7. [Frontend](#frontend)
-8. [Backend](#backend)
+7. [Frontend](./frontend/README.md)
+8. [Backend](./backend/README.md)
 9. [Docker](#docker)
 10. [Comprobaciones rápidas](#comprobaciones-rápidas)
 11. [Notas](#notas)
 
 ---
 
-## 📝 Descripción
+## 📝 Descripción{#descripción}
 Aplicación CRUD completa:
 
 - **Frontend:** React + TypeScript + Vite + Tailwind CSS  
@@ -33,7 +33,7 @@ Permite **crear, leer, actualizar y eliminar usuarios** desde la interfaz web y 
 
 ---
 
-## 📂 Estructura del Proyecto
+## 📂 Estructura del Proyecto{#estructura-del-proyecto}
 ```markdown
 app-crud/
 ├─ 🟢 backend/
@@ -46,12 +46,12 @@ app-crud/
 │  │  │  ├─ user.model.ts
 │  │  │  └─ user.routes.ts
 │  │  ├─ package.json
-│  │  ├─ README.md
 │  │  ├─ tsconfig.json
 │  │  └─ vitest.config.ts
 │  ├─ .env.exmaple
 │  ├─ .gitignore
-│  └─ 🐳 Dockerfile
+│  ├─ 🐳 Dockerfile
+│  └─ 📋 README.md
 │
 ├─ 🗃️ db/ # Plantilla sql de las tablas
 │
@@ -77,7 +77,7 @@ app-crud/
 
 ---
 
-## 🛠️ Tecnologías
+## 🛠️ Tecnologías {#tecnologías}
 - React 18 + TypeScript  
 - Vite  
 - Tailwind CSS + Flowbite  
@@ -88,7 +88,7 @@ app-crud/
 
 ---
 
-## 🔄 Diagrama de Flujo
+## 🔄 Diagrama de Flujo {#diagrama-de-flujo}
 
 ```text
 [Navegador / React 5170]
@@ -103,7 +103,7 @@ app-crud/
 [MySQL Container 3306]
 ```
 
-## ✅ Requisitos
+## ✅ Requisitos {#requisitos}
 
 - Docker y Docker Compose
 - pnpm
@@ -112,9 +112,9 @@ app-crud/
 
 ---
 
-## ⚡ Instalación y Ejecución
+## ⚡ Instalación y Ejecución {#instalación-y-ejecución}
 
-#### 1️⃣ Con Docker (recomendado)
+#### 1️⃣ Con Docker (recomendado) {#docker}
 Levanta todo el stack con:
 ```bash
 docker-compose up -d
@@ -177,7 +177,7 @@ volumes:
 
 ---
 
-## 🔧 Comprobaciones rápidas
+## 🔧 Comprobaciones rápidas {#comprobaciones-rápidas}
 - Backend funcionando:
 ```bash
 curl http://localhost:3000/api/users
@@ -191,7 +191,7 @@ docker ps
 
 ---
 
-## ⚠️ Notas
+## ⚠️ Notas {#notas}
 - Variables de entorno deben estar sincronizadas entre .env y docker-compose.yml
 
 - Hot reload backend con nodemon evita reconstrucciones constantes
