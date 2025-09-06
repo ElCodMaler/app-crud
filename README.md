@@ -21,7 +21,7 @@
 
 ---
 
-## 📝 Descripción{#descripción}
+## 📝 Descripción [#descripción]
 Aplicación CRUD completa:
 
 - **Frontend:** React + TypeScript + Vite + Tailwind CSS  
