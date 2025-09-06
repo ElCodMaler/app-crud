@@ -11,7 +11,7 @@ export interface ApiResponse {
 export const AuthService = {
   register: async (data: User): Promise<ApiResponse> => {
     try {
-      const response = await fetch(`${import.meta.env.VITE_API_URL}/api/user`, {
+      const response = await fetch(import.meta.env.VITE_API_URL, {
         method: 'POST',
         mode: 'cors', // Asegúrate de incluir esto
         headers: {
@@ -38,7 +38,7 @@ export const AuthService = {
   },
   get: async (): Promise<ApiResponse> => {
     try {
-      const response = await fetch(`${import.meta.env.VITE_API_URL}/api/user`, {
+      const response = await fetch(import.meta.env.VITE_API_URL, {
         method: 'GET',
         mode: 'cors', // Asegúrate de incluir esto
         credentials: 'include', // Solo si usas cookies
@@ -63,7 +63,7 @@ export const AuthService = {
   },
   update: async (data: User): Promise<ApiResponse> => {
     try{
-      const response = await fetch(`${import.meta.env.VITE_API_URL}/api/user/${data.id}`, {
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/${data.id}`, {
         method: 'PUT',
         mode: 'cors', // Asegúrate de incluir esto
         credentials: 'include', // Solo si usas cookies
@@ -88,7 +88,7 @@ export const AuthService = {
   },
   delete: async (id: number): Promise<ApiResponse> => {
     try{
-      const response = await fetch(`${import.meta.env.VITE_API_URL}/api/user/${id}`, {
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/${id}`, {
         method: 'DELETE',
         mode: 'cors', // Asegúrate de incluir esto
         credentials: 'include', // Solo si usas cookies

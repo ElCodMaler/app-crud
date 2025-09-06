@@ -18,5 +18,5 @@ COPY node/ .
 RUN pnpm build
 
 # Ejecutamos el backend
-CMD ["node", "dist/index.js"]
+CMD ["node", "dist/src/index.js"]
 

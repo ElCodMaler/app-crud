@@ -14,24 +14,29 @@ services:
       - ./db/init.sql:/docker-entrypoint-initdb.d/init.sql
     networks:
       - app-net
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-psecret"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
 
   backend:
     build:
-      context: ./backend
+      context: ./backend/node
       dockerfile: Dockerfile
     restart: always
-    ports:
-      - "3000:3000"
     environment:
       DB_HOST: db
+      DB_PORT: 3306
       DB_USER: user
       DB_PASSWORD: userpass
       DB_NAME: miapp
-      DB_PORT: 3306
-    env_file:
-      - ./backend/.env
+      PORT: 3000
     depends_on:
-      - db
+      db:
+        condition: service_healthy
+    ports:
+      - "3000:3000"
     networks:
       - app-net
 
@@ -40,7 +45,7 @@ services:
       context: ./frontend
       dockerfile: Dockerfile
     ports:
-      - "5173:5173"
+      - "5170:5170"
     depends_on:
       - backend
     networks:

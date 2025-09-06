@@ -7,9 +7,13 @@ import autoprefixer from 'autoprefixer';
 // https://vite.dev/config/
 export default defineConfig({
   plugins: [react(), tailwindcss(), flowbiteReact()],
+  server: {
+    host: true,  // 👈 esto hace que Vite escuche en 0.0.0.0
+    port: 5170,
+  },
   css: {
     postcss: {
-      plugins: [autoprefixer()],
-    },
-  },
-})
+      plugins: [autoprefixer()]
+    }
+  }
+});
