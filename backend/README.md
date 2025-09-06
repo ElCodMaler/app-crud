@@ -9,8 +9,8 @@
 ---
 
 ## Index
-[Index Proyect](../README.md)
-[Frontend](../frontend/README.md)
+- [Index Proyect](../README.md)
+- [Frontend](../frontend/README.md)
 
 ---
 
