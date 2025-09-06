@@ -114,7 +114,7 @@ app-crud/
 
 ## ⚡ Instalación y Ejecución
 
-#### 1️⃣ Con Docker (recomendado) {#docker}
+#### 1️⃣ Con Docker (recomendado)
 Levanta todo el stack con:
 ```bash
 docker-compose up -d
