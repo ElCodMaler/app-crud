@@ -9,6 +9,12 @@
 
 ---
 
+## Index
+[Index Proyect](../README.md)
+[Backend](../backend/README.md)
+
+---
+
 ## 📖 Descripción
 
 Este es el **frontend** de la aplicación CRUD, construido con **React + TypeScript + Vite + Tailwind CSS**.  
