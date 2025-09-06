@@ -9,7 +9,7 @@
 ## 📖 Tabla de Contenidos
 1. [Descripción](#-descripción)
 2. [Estructura del Proyecto](#-estructura-del-proyecto)
-3. [Tecnologías](#-tecnologías)
+3. [Tecnologías](#%EF%B8%8F-tecnologías)
 4. [Diagrama de Flujo](#-diagrama-de-flujo)
 5. [Requisitos](#-requisitos)
 6. [Instalación y Ejecución](#-instalación-y-ejecución)
@@ -17,7 +17,7 @@
 8. [Backend](./backend/README.md)
 9. [Docker](#-docker)
 10. [Comprobaciones rápidas](#-comprobaciones-rápidas)
-11. [Notas](#-notas)
+11. [Notas](#%EF%B8%8F-notas)
 
 ---
 
