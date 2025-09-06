@@ -177,7 +177,7 @@ volumes:
 
 ---
 
-## 🔧 Comprobaciones rápidas {#comprobaciones-rápidas}
+## 🔧 Comprobaciones rápidas
 - Backend funcionando:
 ```bash
 curl http://localhost:3000/api/users
