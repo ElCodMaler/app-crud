@@ -9,15 +9,15 @@
 ## 📖 Tabla de Contenidos
 1. [Descripción](#-descripción)
 2. [Estructura del Proyecto](#-estructura-del-proyecto)
-3. [Tecnologías](#tecnologías)
-4. [Diagrama de Flujo](#diagrama-de-flujo)
-5. [Requisitos](#requisitos)
-6. [Instalación y Ejecución](#instalación-y-ejecución)
+3. [Tecnologías](-#tecnologías)
+4. [Diagrama de Flujo](-#diagrama-de-flujo)
+5. [Requisitos](-#requisitos)
+6. [Instalación y Ejecución](-#instalación-y-ejecución)
 7. [Frontend](./frontend/README.md)
 8. [Backend](./backend/README.md)
-9. [Docker](#docker)
-10. [Comprobaciones rápidas](#comprobaciones-rápidas)
-11. [Notas](#notas)
+9. [Docker](-#docker)
+10. [Comprobaciones rápidas](-#comprobaciones-rápidas)
+11. [Notas](-#notas)
 
 ---
 
@@ -77,7 +77,7 @@ app-crud/
 
 ---
 
-## 🛠️ Tecnologías {#tecnologías}
+## 🛠️ Tecnologías
 - React 18 + TypeScript  
 - Vite  
 - Tailwind CSS + Flowbite  
@@ -88,7 +88,7 @@ app-crud/
 
 ---
 
-## 🔄 Diagrama de Flujo {#diagrama-de-flujo}
+## 🔄 Diagrama de Flujo
 
 ```text
 [Navegador / React 5170]
@@ -103,7 +103,7 @@ app-crud/
 [MySQL Container 3306]
 ```
 
-## ✅ Requisitos {#requisitos}
+## ✅ Requisitos
 
 - Docker y Docker Compose
 - pnpm
@@ -112,7 +112,7 @@ app-crud/
 
 ---
 
-## ⚡ Instalación y Ejecución {#instalación-y-ejecución}
+## ⚡ Instalación y Ejecución
 
 #### 1️⃣ Con Docker (recomendado) {#docker}
 Levanta todo el stack con:
@@ -191,7 +191,7 @@ docker ps
 
 ---
 
-## ⚠️ Notas {#notas}
+## ⚠️ Notas
 - Variables de entorno deben estar sincronizadas entre .env y docker-compose.yml
 
 - Hot reload backend con nodemon evita reconstrucciones constantes
